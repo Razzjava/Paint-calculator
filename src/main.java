@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class Main {
 
+    // create an array based on the walls and a collection of windows for each walls
 
         public static void main(String[] args) {
 
@@ -13,34 +14,58 @@ public class Main {
             System.out.println(order + (previousOrder+1)); */
             
              Scanner wall = new Scanner(System.in);
-             System.out.println("enter height in meters: ");
-             int wallheight = wall.nextInt();
-
-             System.out.println("Enter width in meters: ");
-             int wallwidth = wall.nextInt();
 
              System.out.println("Enter number of walls: ");
-             int numofwalls = wall.nextInt();
+             int numofwalls = wall.nextInt();    
 
-             System.out.println("Do you have any windows?:");
+             // initializing an array for storing wall data 
+             int[][] walls = new int [numofwalls][2]; 
+       
+
+             for(int i=0; i < numofwalls; i++){
+                System.out.println("enter height in meters: ");
+                int wallheight = wall.nextInt();
+                walls[i][0] = wallheight; 
+
+                System.out.println("Enter width in meters: ");
+                int wallwidth = wall.nextInt();
+
+                walls[i][1] = wallwidth; 
+
+             }
+
+             
+
+             System.out.println("Do you have any windows? (true/false):");
              boolean windows = wall.nextBoolean();
 
-             int area = wallheight * wallwidth;
+             // calculating area of each wall
+             int[] areas = new int[walls.length];
+             for (int i =0; i< walls.length; i++){
+                 areas[i] = walls[i][0] * walls[i][1];
+             }
+             
+             int totalarea = 0;
+
+             for(int currentarea:areas){
+                 System.out.println(currentarea);
+                 totalarea += currentarea;
+             }
 
              if (!windows){
              
-             System.out.println("The total area of your wall is: " + area + " m^2 per wall" + " a total of: " + (numofwalls*area));
-             float estimatedPaint = (float) area / 12;
-             System.out.println("With the estimate of 1 litre of paint covering 12 m^2, you will require: " + estimatedPaint +"litres of paint");
+             System.out.println("The total area of your wall is: " + totalarea + " m^2 " + " for  " + numofwalls + " walls");
+             float estimatedPaint = (float) totalarea / 12;
+             System.out.println("With the estimate of 1 litre of paint covering 12 m^2, you will require: " + estimatedPaint +" litres of paint");
              } else {
-                int allwindows = howmanywindows();
+               int allwindows =  howmanywindows();
                 System.out.println("what height are your windows (m)?: ");
                 int heightofWindows = wall.nextInt();
                 System.out.println("what width are your windows (m)?: ");
                 int widthofWindows = wall.nextInt();
                 int areaofWindows = heightofWindows * widthofWindows; 
                 int totalArea = areaofWindows * allwindows;
-                int finalArea = area - totalArea;
+                int finalArea = totalarea - totalArea;
                 System.out.println("The total area you need to paint is: " + finalArea + " m^2");
                 float estimatedPaint = (float) finalArea / 12;
                 System.out.println("With the estimate of 1 litre of paint covering 12 m^2, you will require: " + estimatedPaint +" litres of paint");
@@ -76,7 +101,7 @@ public class Main {
             return numofwindows;
         }
 
-    
+        
 
 
 

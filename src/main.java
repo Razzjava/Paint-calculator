@@ -37,10 +37,9 @@ private static Scanner scan = new Scanner(System.in);
             System.out.println("With the estimate of 1 litre of paint covering 12 m^2, you will require: "
                     + estimatedPaint + " litres of paint");
         } else {
+
             int windowsArea = howmanywindows();
             int finalArea = totalareaWalls - windowsArea;
-
-            
             System.out.println("The total area you need to paint is: " + finalArea + " m^2");
             float estimatedPaint = (float) finalArea / 12;
             System.out.println("With the estimate of 1 litre of paint covering 12 m^2, you will require: " + estimatedPaint + " litres of paint ");
@@ -72,15 +71,21 @@ private static Scanner scan = new Scanner(System.in);
         }
 
         // calculating area of each wall
-        int[] areas = new int[walls.length];
-        for (int i = 0; i < walls.length; i++) {
-            areas[i] = walls[i][0] * walls[i][1];
-        }
+        int[] areas = calculateArea(walls);
 
         
 
         return areas;
     }
+
+    static int[] calculateArea(int[][] walls){
+        int[] areas = new int[walls.length];
+        for (int i = 0; i < walls.length; i++) {
+            areas[i] = walls[i][0] * walls[i][1];
+        }
+
+        return areas;
+    } 
 
     static int howmanywindows() {
         System.out.println("How many windows do you have?: ");
